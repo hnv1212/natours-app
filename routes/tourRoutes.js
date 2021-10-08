@@ -39,6 +39,8 @@ router
   .patch(
     authController.protect,
     authController.restrictTo('admin', 'lead-guide'),
+    tourController.uploadTourImages,
+    tourController.resizeTourImages,
     tourController.updateTour
   )
   .delete(
@@ -47,14 +49,5 @@ router
     tourController.deleteTour
   );
 
-// POST /tour/23423rasd/reviews
-// GET  /tour/sdfj23432/reviews
-// router
-//   .route('/:tourId/reviews')
-//   .post(
-//     authController.protect,
-//     authController.restrictTo('user'),
-//     reviewController.createReview
-//   );
 
 module.exports = router;
