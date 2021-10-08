@@ -15,7 +15,7 @@ class APIFeatures {
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
 
-    console.log(JSON.parse(queryStr));
+    // console.log(JSON.parse(queryStr));
     //console.log(req.query, queryObj);
     this.query = this.query.find(JSON.parse(queryStr));
     //let query = Tour.find(JSON.parse(queryStr));

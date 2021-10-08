@@ -4,7 +4,7 @@ dotenv.config({ path: './config.env' });
 // console.log(process.env);
 
 process.on('uncaughtException', (err) => {
-  console.log(err);
+  // console.log(err);
   process.exit(1);
 });
 
@@ -20,7 +20,7 @@ mongoose
   });
 
 const app = require('./app');
-console.log(app.get('env'));
+// console.log(app.get('env'));
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
@@ -29,10 +29,18 @@ const server = app.listen(port, () => {
 
 process.on('unhandledRejection', (err) => {
   console.log('UNHANDLER REJECTION! 🤬 Shutting down...');
-  console.log(err.name, err.message);
+  // console.log(err.name, err.message);
 
   server.close(() => {
     // using .close() to give server time to finish all request are handling or pending
     process.exit(1);
   });
 });
+
+// response to heroku signal
+process.on('SIGTERM', () => {
+  console.log('SIGTERM RECEIVED. shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated')
+  })
+})
